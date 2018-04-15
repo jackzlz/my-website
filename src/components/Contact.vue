@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     submit: function () {
-      this.$http.post(this.GLOBAL.baseUrl + '/business/message/leave', { cust_name: this.userName, contact: this.userEmail, subject: this.subject, message: this.userMsg }).then(function (response) {
+      this.$http.post(this.GLOBAL.baseUrl + '/business/message/leave', { cust_name: this.userName, contact: this.userEmail, subject: this.subject, message: this.userMsg }, { emulateJSON: true }).then(function (response) {
         console.log(response)
       }, function (response) {
         console.log(response)

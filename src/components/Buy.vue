@@ -154,7 +154,7 @@ export default {
       let orderInfos = []
       orderInfos.push(orderInfo)
       let params = { email: this.email, phone: this.phone, order_info: JSON.stringify(orderInfos) }
-      this.$http.post(this.GLOBAL.baseUrl + '/business/goods/saveOrderGoods', params).then(function (response) {
+      this.$http.post(this.GLOBAL.baseUrl + '/business/goods/saveOrderGoods', params, { emulateJSON: true }).then(function (response) {
         if (response.body.errno === 0) {
           $('#myModal').modal('hide')
         }

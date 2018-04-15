@@ -34,7 +34,7 @@ export default {
       if (!this.name || !this.email || !this.subject || !this.message) {
         return
       }
-      this.$http.post(this.GLOBAL.baseUrl + '/business/msg/leave', { cust_name: this.name, contact: this.email, subject: this.subject, message: this.message }).then(function (response) {
+      this.$http.post(this.GLOBAL.baseUrl + '/business/msg/leave', { cust_name: this.name, contact: this.email, subject: this.subject, message: this.message }, { emulateJSON: true }).then(function (response) {
         if (response.body.errno === 0) {
           this.name = ''
           this.email = ''
