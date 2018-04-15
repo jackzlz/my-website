@@ -706,7 +706,7 @@ ul.nostyle i {
 }
 #animated-number {
   padding: 87px 0 87px;
-  background: #132125 url(../images/bg.jpg) no-repeat 0 0;
+  background: #132125 url(/static/images/bg.jpg) no-repeat 0 0;
   background-size: cover;
   color: #fff;
 }

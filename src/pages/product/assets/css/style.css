@@ -218,7 +218,7 @@ input:focus {
 }
 .logo{
 	float:left;
-	margin-top:10px;
+	margin-top:3%;
 }
 .header_right{
 	margin: 2% 0;
@@ -1767,12 +1767,12 @@ label {
 }
 .shoping_left{
 	float: left;
-	width:68.333%;
+	width:75.333%;
 	margin-right: 3.3333%;
 }
 .shoping_right{
 	float: right;
-	width:14.333%;
+	width:7.333%;
 }
 .shoping1_of_1{
 	float: left;
@@ -1957,13 +1957,12 @@ ul.s_icons{
 	width: 96.3333%;
 	outline: none;
 	-webkit-appearance: none;
-	text-transform: capitalize;
 }
 .contact-form textarea{
 	resize:none;
 	height:120px;		
 }
-.contact-form input[type="submit"]{
+.contact-form input[type="button"]{
 	margin-top: 10px;
 	-webkit-appearance: none;
 	border: none;

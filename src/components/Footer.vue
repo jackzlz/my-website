@@ -4,176 +4,16 @@
     <!-- footer_top -->
     <div class="footer_top">
       <div class="container">
-        <div class="span_of_4">
-          <div class="span1_of_4">
-            <h4>Shop</h4>
-            <ul class="f_nav">
-              <li>
-                <a href="#">new arrivals</a>
-              </li>
-              <li>
-                <a href="#">men</a>
-              </li>
-              <li>
-                <a href="#">women</a>
-              </li>
-              <li>
-                <a href="#">accessories</a>
-              </li>
-              <li>
-                <a href="#">kids</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-              <li>
-                <a href="#">trends</a>
-              </li>
-              <li>
-                <a href="#">sale</a>
-              </li>
-              <li>
-                <a href="#">style videos</a>
-              </li>
-            </ul>
-          </div>
-          <div class="span1_of_4">
-            <h4>help</h4>
-            <ul class="f_nav">
-              <li>
-                <a href="#">frequently asked questions</a>
-              </li>
-              <li>
-                <a href="#">men</a>
-              </li>
-              <li>
-                <a href="#">women</a>
-              </li>
-              <li>
-                <a href="#">accessories</a>
-              </li>
-              <li>
-                <a href="#">kids</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-            </ul>
-            <h4 class="top">company name</h4>
-            <ul class="f_nav">
-              <li>
-                <a href="#">frequently asked questions</a>
-              </li>
-              <li>
-                <a href="#">men</a>
-              </li>
-              <li>
-                <a href="#">women</a>
-              </li>
-              <li>
-                <a href="#">accessories</a>
-              </li>
-              <li>
-                <a href="#">kids</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-            </ul>
-          </div>
-          <div class="span1_of_4">
-            <h4>account</h4>
-            <ul class="f_nav">
-              <li>
-                <a href="#">login</a>
-              </li>
-              <li>
-                <a href="#">create an account</a>
-              </li>
-              <li>
-                <a href="#">create wishlist</a>
-              </li>
-              <li>
-                <a href="#">my shopping bag</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-              <li>
-                <a href="#">create wishlist</a>
-              </li>
-            </ul>
-            <h4 class="top">style zone</h4>
-            <ul class="f_nav">
-              <li>
-                <a href="#">frequently asked questions</a>
-              </li>
-              <li>
-                <a href="#">men</a>
-              </li>
-              <li>
-                <a href="#">women</a>
-              </li>
-              <li>
-                <a href="#">accessories</a>
-              </li>
-              <li>
-                <a href="#">kids</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-            </ul>
-          </div>
-          <div class="span1_of_4">
-            <h4>popular</h4>
-            <ul class="f_nav">
-              <li>
-                <a href="#">new arrivals</a>
-              </li>
-              <li>
-                <a href="#">men</a>
-              </li>
-              <li>
-                <a href="#">women</a>
-              </li>
-              <li>
-                <a href="#">accessories</a>
-              </li>
-              <li>
-                <a href="#">kids</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-              <li>
-                <a href="#">trends</a>
-              </li>
-              <li>
-                <a href="#">sale</a>
-              </li>
-              <li>
-                <a href="#">style videos</a>
-              </li>
-              <li>
-                <a href="#">login</a>
-              </li>
-              <li>
-                <a href="#">brands</a>
-              </li>
-            </ul>
-          </div>
-          <div class="clearfix"></div>
-        </div>
         <!-- start span_of_2 -->
         <div class="span_of_2">
           <div class="span1_of_2">
             <h5>need help?
-              <a href="#">contact us
+              <router-link :to="{name: 'Contact'}">
+                contact us
                 <span> ></span>
-              </a>
+              </router-link>
             </h5>
-            <p>(or) Call us: +91-70-45022088</p>
+            <p>(or) Call us: +91-70-12345678</p>
           </div>
           <div class="span1_of_2">
             <h5>follow us </h5>
@@ -206,7 +46,7 @@
       <div class="container">
         <div class="copy">
           <p class="link">&copy; All rights reserved | Design by&nbsp;
-            <a href="http://www.smallseashell.com">.小贝壳网站模板</a>
+            <a href="#">.</a>
           </p>
         </div>
       </div>

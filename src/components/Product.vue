@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="product">
 
     <!-- content -->
     <div class="container">
@@ -24,28 +24,28 @@
           <!-- grids_of_4 -->
 
           <div class="grids_of_4" v-for="(datas,index) in dataList" :key="index">
-            <div class="grid1_of_4" v-for="product in datas" :key="product.code">
+            <div class="grid1_of_4" v-for="product in datas" :key="product.id">
               <div class="content_box">
-                <a href="details.html">
+                <router-link :to="{name: 'Detail', params: {productCode: product.goods_code}}">
                   <div class="view view-fifth">
-                    <img :src="product.imgUrl" class="img-responsive" alt="" />
+                    <img :src="product.goods_img_url" class="img-responsive" alt="" />
                     <div class="mask">
                       <div class="info">Quick View</div>
                     </div>
                   </div>
-                </a>
+                </router-link>
                 <h4>
-                  <router-link :to="{name: 'Detail', params: {id: product.code}}">{{product.name}}</router-link>
+                  <router-link :to="{name: 'Detail', params: {productCode: product.goods_code}}">{{product.goods_name}}</router-link>
                 </h4>
                 <p>{{product.desc}}</p>
-                Rs. {{product.price}}
+                Rs. {{product.goods_price}}
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
           <!-- end grids_of_4 -->
 
-          <nav aria-label="Page navigation" style="text-align:right">
+          <!-- <nav aria-label="Page navigation" style="text-align:right">
             <ul class="pagination">
               <li>
                 <a href="#" aria-label="Previous">
@@ -73,7 +73,7 @@
                 </a>
               </li>
             </ul>
-          </nav>
+          </nav> -->
         </div>
         <div class="clearfix"></div>
 
@@ -88,9 +88,9 @@ export default {
   name: 'product',
   data () {
     return {
-      productList: null,
+      productList: [],
       columns: 4,
-      groups: null
+      groups: []
     }
   },
   computed: {
@@ -109,88 +109,48 @@ export default {
   },
   methods: {
     fetchData: function () {
-      this.productList = [
-        {
-          code: 'w1',
-          name: 'DUIS AUTEMCC',
-          imgUrl: '/static/images/w1.jpg',
-          price: '499',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w2',
-          name: 'DUIS AUTEMUU',
-          imgUrl: '/static/images/w2.jpg',
-          price: '500',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w3',
-          name: 'DUIS AUTEMXX',
-          imgUrl: '/static/images/w3.jpg',
-          price: '600',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w4',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w5',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w6',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w7',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w8',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w9',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        },
-        {
-          code: 'w10',
-          name: 'DUIS AUTEMFF',
-          imgUrl: '/static/images/w4.jpg',
-          price: '700',
-          desc: 'this is a desc text.'
-        }
-      ]
-      this.groups = ['WOMEN', 'NEW ARRIVALS']
+      this.fetchGroups()
     },
+
+    fetchGroups: function () {
+      this.$http.get(this.GLOBAL.baseUrl + '/business/goods/seriesList').then(function (response) {
+        if (response.body.errno === 0) {
+          let groupList = response.body.body.list
+          for (let group of groupList) {
+            this.groups.push(group.goods_series)
+          }
+
+          this.fetchProductList(this.groups[0])
+        }
+      }, function (response) {
+        this.$router.push({ name: 'Product' })
+      })
+    },
+
+    fetchProductList: function (group) {
+      this.productList = []
+      this.$http.get(this.GLOBAL.baseUrl + '/business/goods/list', { params: { goods_series: group } }).then(function (response) {
+        if (response.body.errno === 0) {
+          let productList = response.body.body.list
+          for (let product of productList) {
+            this.productList.push(product)
+          }
+        }
+      }, function (response) {
+        this.$router.push({ name: 'Product' })
+      })
+    },
+
     groupClick: function (group, event) {
       event.stopPropagation()
-      alert(group)
+      this.fetchProductList(group)
     }
   }
 }
 </script>
 
 <style scoped>
-
+.product {
+  min-height: 650px;
+}
 </style>
