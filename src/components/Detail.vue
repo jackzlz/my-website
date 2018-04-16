@@ -8,7 +8,7 @@
           <div class="single_left">
             <div class="grid images_3_of_2">
               <ul id="etalage">
-                <li v-for="(imgUrl) in goods.goods_img_url" :key="imgUrl">
+                <li v-for="(imgUrl, index) in goods.goods_img_url" :key="index">
                   <img class="etalage_thumb_image" :src="imgUrl" />
                   <img class="etalage_source_image" :src="imgUrl" title="" />
                 </li>
@@ -66,7 +66,8 @@ export default {
       num_actual: 1,
       min: 1,
       max: 10,
-      goods: {}
+      goods: {},
+      etalageNeedLoad: false
     }
   },
   computed: {
@@ -76,53 +77,72 @@ export default {
       },
       set: function (newValue) {
         if (!isNaN(newValue)) {
-          this.num_actual = newValue < this.min ? this.min : newValue > this.max ? this.max : newValue
+          this.num_actual =
+            newValue < this.min
+              ? this.min
+              : newValue > this.max ? this.max : newValue
         }
       }
     }
   },
   methods: {
-
     buy: function (event) {
       event.preventDefault()
-      this.$router.push({ name: 'Buy', params: { productCode: this.goods.goods_code, productId: this.goods.id, num: this.num_actual } })
+      this.$router.push({
+        name: 'Buy',
+        params: {
+          productCode: this.goods.goods_code,
+          productId: this.goods.id,
+          num: this.num_actual
+        }
+      })
     },
     fetchData: function () {
-      this.$http.get(this.GLOBAL.baseUrl + '/business/goods/goodDetail', { params: { good_code: this.$route.params.productCode } }).then(function (response) {
-        if (response.body.errno === 0 && response.body.body.good) {
-          this.goods = response.body.body.good
-        } else {
-          this.$router.push({ name: 'Product' })
-        }
-      }, function (response) {
-        this.$router.push({ name: 'Product' })
-      })
+      this.$http
+        .get(this.GLOBAL.baseUrl + '/business/goods/goodDetail', {
+          params: { good_code: this.$route.params.productCode }
+        })
+        .then(
+          function (response) {
+            if (response.body.errno === 0 && response.body.body.good) {
+              this.goods = response.body.body.good
+              this.etalageNeedLoad = true
+            } else {
+              this.$router.push({ name: 'Product' })
+            }
+          },
+          function (response) {
+            this.$router.push({ name: 'Product' })
+          }
+        )
     }
   },
   updated: function () {
-    $('#etalage').etalage({
-      thumb_image_width: 300,
-      thumb_image_height: 400,
-      source_image_width: 900,
-      source_image_height: 1200,
-      show_hint: true,
-      click_callback: function (imageAnchor, instanceId) {
-        alert(
-          'Callback example:\nYou clicked on an image with the anchor: "' +
-          imageAnchor +
-          '"\n(in Etalage instance: "' +
-          instanceId +
-          '")'
-        )
-      }
-    })
+    if (this.etalageNeedLoad) {
+      $('#etalage').etalage({
+        thumb_image_width: 300,
+        thumb_image_height: 400,
+        source_image_width: 900,
+        source_image_height: 1200,
+        show_hint: true,
+        click_callback: function (imageAnchor, instanceId) {
+          alert(
+            'Callback example:\nYou clicked on an image with the anchor: "' +
+              imageAnchor +
+              '"\n(in Etalage instance: "' +
+              instanceId +
+              '")'
+          )
+        }
+      })
+      this.etalageNeedLoad = false
+    }
   },
   created: function () {
     this.fetchData()
   },
 
-  mounted: function () {
-  }
+  mounted: function () {}
 }
 </script>
 

@@ -9,7 +9,7 @@
           </div>
           <div class="shoping1_of_2">
             <h4>
-              <a href="#">{{goods.goods_name}}</a>
+              <router-link :to="{name: 'Detail', params: {productCode: goods.goods_code}}">{{goods.goods_name}}</router-link>
             </h4>
             <span>qty
               <b>{{buyNum}}</b> | code :{{goods.goods_code}}</span>
@@ -44,7 +44,7 @@
       </div>
       <div class="shoping_bag2">
         <div class="shoping_left">
-          <a class="btn1" href="#" v-on:click="order($event)">place order</a>
+          <a class="btn1" href="#" v-on:click="order">place order</a>
         </div>
         <div class="shoping_right">
           <p class="tot">total &nbsp;
@@ -140,8 +140,8 @@ export default {
         this.$router.push({ name: 'Product' })
       })
     },
-    order: function (event) {
-      event.stopPropagation()
+    order: function () {
+      event.preventDefault()
       $('#myModal').modal({
         keyboard: true
       })
